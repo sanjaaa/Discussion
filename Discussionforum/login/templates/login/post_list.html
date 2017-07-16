@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<html>
+<head>
+        
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+<div class="page-header">
+            <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+            <h1>Django Discussion forum</h1>
+        </div>
+<div class="content container">
+    <div class="row">
+        <div class="col-md-8">
+{% for post in posts %}
+    <div class="post">
+        <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.subject }}</a></h2>
+         <div class="date">
+        <p>published: {{ post.created_date_discussion }}</p>
+        </div>
+    {% for comment in comments %}
+    {% if post == comment.discussion_id %}
+    <div>
+        <h2>{{ comment.content }}</h2>
+    </div>
+    {% endif %}
+{% endfor %}
+    </div>
+{% endfor %}
+ </body>
+</html>
